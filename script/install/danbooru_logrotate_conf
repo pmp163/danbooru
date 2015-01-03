@@ -1,4 +1,4 @@
-/var/www/danbooru2/shared/log/*.log {
+/var/www/putty/shared/log/*.log {
   daily
   rotate 3
   copytruncate

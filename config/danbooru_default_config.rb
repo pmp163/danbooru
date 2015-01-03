@@ -319,12 +319,12 @@ module Danbooru
     end
 
     def iqdb_file
-      # /var/www/danbooru2/shared/iqdb.db
+      # /var/www/putty/shared/iqdb.db
       nil
     end
 
     def shared_dir_path
-      "/var/www/danbooru2/shared"
+      "/var/www/putty/shared"
     end
 
     def coinbase_secret
