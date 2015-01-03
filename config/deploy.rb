@@ -19,10 +19,14 @@ set :secret_1, SecureRandom.base64(32)
 set :secret_2, SecureRandom.base64(32)
 
 set :application, "danbooru"
-set :repository,  "git://github.com/r888888888/danbooru.git"
+set :repository,  "git://github.com/pmp163/danbooru.git"
 set :scm, :git
-set :user, "danbooru"
-set :deploy_to, "/var/www/danbooru2"
+set :user, "putty"
+set :deploy_to, "/var/www/putty"
+
+set :ssh_options, {
+    config: false
+}
 
 require 'capistrano-unicorn'
 
@@ -36,18 +40,18 @@ namespace :local_config do
 
   desc "Initialize the secrets"
   task :setup_secrets do
-    run "mkdir -p ~/.danbooru"
-    run "if [[ ! -e ~/.danbooru/session_secret_key ]] ; then echo '#{secret_1}' > ~/.danbooru/session_secret_key ; fi"
-    run "if [[ ! -e ~/.danbooru/secret_token ]] ; then echo '#{secret_2}' > ~/.danbooru/secret_token ; fi"
-    run "chmod 600 ~/.danbooru/secret_token"
-    run "chmod 600 ~/.danbooru/session_secret_key"
-    run "chown -R #{user}:#{user} ~/.danbooru"
+    run "mkdir -p ~/.key"
+    run "if [[ ! -e ~/.key/session_secret_key ]] ; then echo '#{secret_1}' > ~/.key/session_secret_key ; fi"
+    run "if [[ ! -e ~/.key/secret_token ]] ; then echo '#{secret_2}' > ~/.key/secret_token ; fi"
+    run "chmod 600 ~/.key/secret_token"
+    run "chmod 600 ~/.key/session_secret_key"
+    run "chown -R #{user}:#{user} ~/.key"
   end
 
   desc "Initialize local config files"
   task :setup_local_files do
-    run "curl -s https://raw.githubusercontent.com/r888888888/danbooru/master/script/install/danbooru_local_config.rb.templ > #{deploy_to}/shared/config/danbooru_local_config.rb"
-    run "curl -s https://raw.githubusercontent.com/r888888888/danbooru/master/script/install/database.yml.templ > #{deploy_to}/shared/config/database.yml"
+    run "curl -s https://raw.githubusercontent.com/pmp163/danbooru/master/script/install/danbooru_local_config.rb.templ > #{deploy_to}/shared/config/danbooru_local_config.rb"
+    run "curl -s https://raw.githubusercontent.com/pmp163/danbooru/master/script/install/database.yml.templ > #{deploy_to}/shared/config/database.yml"
   end
 
   desc "Link the local config files"

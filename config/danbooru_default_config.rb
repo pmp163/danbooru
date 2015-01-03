@@ -324,7 +324,7 @@ module Danbooru
     end
 
     def shared_dir_path
-      "/var/www/danbooru2/shared"
+      "/var/www/putty/shared"
     end
 
     def coinbase_secret
